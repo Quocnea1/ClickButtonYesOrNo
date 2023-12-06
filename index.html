@@ -49,9 +49,26 @@
       .interaction-buttons button:hover {
         transform: translateY(-10px) scale(1.1);
       }
+
+      #loveYouMessage {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 24px;
+        color: red;
+        display: none;
+      }
     </style>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="https://threejs.org/examples/js/libs/stats.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   </head>
 
   <body class="h-screen flex items-center justify-center">
@@ -63,7 +80,10 @@
       class="w-full max-w-md bg-white p-8 rounded-lg shadow-md interaction-container"
     >
       <div class="text-center mb-8">
-        <h1 class="text-3xl font-semibold text-gray-800">
+        <h1
+          class="text-3xl font-semibold text-gray-800"
+          id="loveYouModal"
+        >
           Em có Thích Quốc không?
         </h1>
         <p class="text-gray-500"></p>
@@ -82,14 +102,16 @@
         <!-- Button "Yes" with click event -->
         <button
           id="btnYes"
-          onclick="showMessage()"
+          onclick="showLoveYouMessage()"
         >
           Yes
         </button>
       </div>
+
+      <!-- Love You Message -->
+      <div id="loveYouMessage">ME TOO !! ^^</div>
     </div>
 
-    <!-- Your existing JavaScript code for particles.js and stats.js -->
     <script>
       particlesJS("particles-js", {
         particles: {
@@ -182,8 +204,8 @@
         var rangeX = 200;
         var rangeY = 200;
 
-        var randomX = Math.random() * (maxX > rangeX ? rangeX : maxX);
-        var randomY = Math.random() * (maxY > rangeY ? rangeY : maxY);
+        var randomX = Math.random() * (maxX > rangeX ? rangeX : maxX) + 10;
+        var randomY = Math.random() * (maxY > rangeY ? rangeY : maxY) + 10;
 
         btnNo.style.transition = "transform 0.3s ease-in-out";
         btnNo.style.transform =
@@ -191,9 +213,15 @@
         btnNo.style.transition = "none";
       }
 
-      function showMessage() {
-        alert("Hihi, Me too !!");
-        showNotification("Hihi, Me too");
+      function showLoveYouMessage() {
+        var loveYouMessage = document.getElementById("loveYouMessage");
+        loveYouMessage.style.display = "block";
+        var loveYouMessages = document.getElementById("loveYouModal");
+        loveYouMessages.style.display = "none";
+        var loveYouMessagess = document.getElementById("btnYes");
+        loveYouMessagess.style.display = "none";
+        var loveYouMessagess = document.getElementById("btnNo");
+        loveYouMessagess.style.display = "none";
       }
     </script>
   </body>
