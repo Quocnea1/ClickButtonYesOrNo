@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Interactive Particles</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+    />
+    <style>
+      body {
+        margin: 0;
+        font: normal 75% Arial, Helvetica, sans-serif;
+      }
+
+      #particles-js {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: url("https://source.unsplash.com/random") center/cover
+          no-repeat;
+      }
+
+      .interaction-container {
+        position: relative;
+        z-index: 2;
+      }
+
+      .interaction-buttons {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+      }
+
+      .interaction-buttons button {
+        padding: 10px;
+        background-color: #4a5568;
+        color: #ffffff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: transform 0.3s ease-in-out;
+      }
+
+      .interaction-buttons button:hover {
+        transform: translateY(-10px) scale(1.1);
+      }
+    </style>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://threejs.org/examples/js/libs/stats.min.js"></script>
+  </head>
+
+  <body class="h-screen flex items-center justify-center">
+    <!-- particles.js container -->
+    <div id="particles-js"></div>
+
+    <!-- Your interaction container -->
+    <div
+      class="w-full max-w-md bg-white p-8 rounded-lg shadow-md interaction-container"
+    >
+      <div class="text-center mb-8">
+        <h1 class="text-3xl font-semibold text-gray-800">
+          Em có Thích Quốc không?
+        </h1>
+        <p class="text-gray-500"></p>
+      </div>
+
+      <div class="interaction-buttons">
+        <!-- Button "No" with hover effect -->
+        <button
+          id="btnNo"
+          onmouseenter="moveButton()"
+          onclick="moveButton()"
+        >
+          No
+        </button>
+
+        <!-- Button "Yes" with click event -->
+        <button
+          id="btnYes"
+          onclick="showMessage()"
+        >
+          Yes
+        </button>
+      </div>
+    </div>
+
+    <!-- Your existing JavaScript code for particles.js and stats.js -->
+    <script>
+      particlesJS("particles-js", {
+        particles: {
+          number: {
+            value: 80,
+            density: {
+              enable: true,
+              value_area: 800,
+            },
+          },
+          color: {
+            value: "#ffffff",
+          },
+          shape: {
+            type: "circle",
+            stroke: {
+              width: 0,
+              color: "#000000",
+            },
+            polygon: {
+              nb_sides: 5,
+            },
+          },
+          opacity: {
+            value: 0.5,
+            random: false,
+            anim: {
+              enable: false,
+              speed: 1,
+              opacity_min: 0.1,
+              sync: false,
+            },
+          },
+          size: {
+            value: 3,
+            random: true,
+            anim: {
+              enable: false,
+              speed: 40,
+              size_min: 0.1,
+              sync: false,
+            },
+          },
+          line_linked: {
+            enable: true,
+            distance: 150,
+            color: "#ffffff",
+            opacity: 0.4,
+            width: 1,
+          },
+          move: {
+            enable: true,
+            speed: 6,
+            direction: "none",
+            random: false,
+            straight: false,
+            out_mode: "out",
+            bounce: false,
+            attract: {
+              enable: false,
+              rotateX: 600,
+              rotateY: 1200,
+            },
+          },
+        },
+        interactivity: {
+          detect_on: "canvas",
+          events: {
+            onhover: {
+              enable: true,
+              mode: "repulse",
+            },
+          },
+          modes: {
+            repulse: {
+              distance: 100,
+              duration: 0.4,
+            },
+          },
+        },
+        retina_detect: true,
+      });
+
+      var btnNo = document.getElementById("btnNo");
+
+      function moveButton() {
+        var maxX = window.innerWidth - btnNo.clientWidth;
+        var maxY = window.innerHeight - btnNo.clientHeight;
+
+        var rangeX = 200;
+        var rangeY = 200;
+
+        var randomX = Math.random() * (maxX > rangeX ? rangeX : maxX);
+        var randomY = Math.random() * (maxY > rangeY ? rangeY : maxY);
+
+        btnNo.style.transition = "transform 0.3s ease-in-out";
+        btnNo.style.transform =
+          "translate(" + randomX + "px, " + randomY + "px)";
+        btnNo.style.transition = "none";
+      }
+
+      function showMessage() {
+        alert("Hihi, Me too !!");
+      }
+    </script>
+  </body>
+</html>
